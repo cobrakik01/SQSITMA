@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeticionCreateDlg" widgetVar="PeticionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePeticionTitle}">
+            <h:form id="PeticionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{peticionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePeticionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{peticionController.selected.id}" title="#{bundle.CreatePeticionTitle_id}" required="true" requiredMessage="#{bundle.CreatePeticionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreatePeticionLabel_asunto}" for="asunto" />
+                        <p:inputText id="asunto" value="#{peticionController.selected.asunto}" title="#{bundle.CreatePeticionTitle_asunto}" required="true" requiredMessage="#{bundle.CreatePeticionRequiredMessage_asunto}"/>
+                        <p:outputLabel value="#{bundle.CreatePeticionLabel_peticion}" for="peticion" />
+                        <p:inputText id="peticion" value="#{peticionController.selected.peticion}" title="#{bundle.CreatePeticionTitle_peticion}" required="true" requiredMessage="#{bundle.CreatePeticionRequiredMessage_peticion}"/>
+                        <p:outputLabel value="#{bundle.CreatePeticionLabel_createdAt}" for="createdAt" />
+                        <p:calendar id="createdAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{peticionController.selected.createdAt}" title="#{bundle.EditPeticionTitle_createdAt}" required="true" requiredMessage="#{bundle.EditPeticionRequiredMessage_createdAt}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePeticionLabel_updatedAt}" for="updatedAt" />
+                        <p:calendar id="updatedAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{peticionController.selected.updatedAt}" title="#{bundle.EditPeticionTitle_updatedAt}" required="true" requiredMessage="#{bundle.EditPeticionRequiredMessage_updatedAt}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePeticionLabel_usuarioEmail}" for="usuarioEmail" />
+                        <p:selectOneMenu id="usuarioEmail" value="#{peticionController.selected.usuarioEmail}" required="true" requiredMessage="#{bundle.EditPeticionRequiredMessage_usuarioEmail}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioEmailItem"
+                                           itemValue="#{usuarioEmailItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{peticionController.create}" value="#{bundle.Save}" update="display,:PeticionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PeticionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeticionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
