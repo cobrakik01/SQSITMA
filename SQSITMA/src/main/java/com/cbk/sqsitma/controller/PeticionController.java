@@ -26,8 +26,18 @@ public class PeticionController implements Serializable {
     private com.cbk.sqsitma.controller.PeticionFacade ejbFacade;
     private List<Peticion> items = null;
     private Peticion selected;
+    private Peticion ultimaPeticionRealizada;
 
     public PeticionController() {
+    }
+
+    public Peticion getUltimaPeticionRealizada() {
+        ultimaPeticionRealizada = ejbFacade.ultimaPeticion();
+        return ultimaPeticionRealizada;
+    }
+
+    public void setUltimaPeticionRealizada(Peticion ultimaPeticionRealizada) {
+        this.ultimaPeticionRealizada = ultimaPeticionRealizada;
     }
 
     public Peticion getSelected() {

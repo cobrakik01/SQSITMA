@@ -7,42 +7,45 @@
 
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
-        <h:outputStylesheet library="css" name="jsfcrud.css"/>
-        <h:outputScript library="js" name="jsfcrud.js"/>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="justified-nav.css"/>
+        <h:outputScript library="js" name="ie-emulation-modes-warning.js"/>
     </h:head>
 
     <h:body>
 
         <p:growl id="growl" life="3000" />
 
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
-                <h:form id="menuForm">
-                    <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="#{bundle.Maintenance}">
-                            <p:menuitem value="Carrera" outcome="/admin/carrera/List.xhtml" />
-                            <p:menuitem value="Departamento" outcome="/admin/departamento/List.xhtml" />
-                            <p:menuitem value="EstatusPeticion" outcome="/admin/estatusPeticion/List.xhtml" />
-                            <p:menuitem value="GrupoUsuario" outcome="/admin/grupoUsuario/List.xhtml" />
-                            <p:menuitem value="PersonalAtencion" outcome="/admin/personalAtencion/List.xhtml" />
-                            <p:menuitem value="Peticion" outcome="/admin/peticion/List.xhtml" />
-                            <p:menuitem value="Usuario" outcome="/admin/usuario/List.xhtml" />
-                        </p:submenu>
-                    </p:menubar>
-                </h:form>
-            </p:layoutUnit>
+        <div class="container">
 
-            <p:layoutUnit position="south" size="60">
-                <ui:insert name="footer"/>
-            </p:layoutUnit>
+            <div class="masthead">
+                <h3 class="text-muted">SQS ITMA</h3>
+                <div role="navigation">
+                    <ul class="nav nav-justified">
+                        <li class="active"><a href="/SQSITMA/faces/admin/index.xhtml">Inicio</a></li>
+                        <li><a href="/SQSITMA/faces/admin/carrera/List.xhtml">Carreras</a></li>
+                        <li><a href="/SQSITMA/faces/admin/departamento/List.xhtml">Departamentos</a></li>
+                        <li><a href="/SQSITMA/faces/admin/estatusPeticion/List.xhtml">Peticiones</a></li>
+                        <li><a href="/SQSITMA/faces/admin/grupoUsuario/List.xhtml">Grupo usuarios</a></li>
+                        <li><a href="/SQSITMA/faces/admin/personalAtencion/List.xhtml">Personal</a></li>
+                        <li><a href="/SQSITMA/faces/admin/peticion/List.xhtml">Nueva Peticion</a></li>
+                        <li><a href="/SQSITMA/faces/admin/usuario/List.xhtml">Usuarios</a></li>
+                    </ul>
+                </div>
+            </div>
 
-            <p:layoutUnit position="center">
+            <!-- Example row of columns -->
+            <div class="row">
                 <ui:insert name="body"/>
-            </p:layoutUnit>
+            </div>
 
-        </p:layout>
+            <!-- Site footer -->
+            <footer class="footer">
+                <p>&copy; ITMA 2014 <br /> Farias Sánchez Federico | Semestre 8</p>
+            </footer>
 
+        </div> <!-- /container -->
+        <h:outputScript library="js" name="ie10-viewport-bug-workaround.js"/>
     </h:body>
 
 </html>

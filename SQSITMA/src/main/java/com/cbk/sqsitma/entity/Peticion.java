@@ -42,8 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Peticion.findByAsunto", query = "SELECT p FROM Peticion p WHERE p.asunto = :asunto"),
     @NamedQuery(name = "Peticion.findByPeticion", query = "SELECT p FROM Peticion p WHERE p.peticion = :peticion"),
     @NamedQuery(name = "Peticion.findByCreatedAt", query = "SELECT p FROM Peticion p WHERE p.createdAt = :createdAt"),
-    @NamedQuery(name = "Peticion.findByUpdatedAt", query = "SELECT p FROM Peticion p WHERE p.updatedAt = :updatedAt")})
+    @NamedQuery(name = "Peticion.findByUpdatedAt", query = "SELECT p FROM Peticion p WHERE p.updatedAt = :updatedAt"),
+    @NamedQuery(name = "Peticion.findByLast", query = "SELECT p FROM Peticion p ORDER BY p.id ASC LIMIT 1")})
 public class Peticion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -172,5 +174,5 @@ public class Peticion implements Serializable {
     public String toString() {
         return "com.cbk.sqsitma.entity.Peticion[ id=" + id + " ]";
     }
-    
+
 }
