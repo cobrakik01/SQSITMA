@@ -12,12 +12,10 @@
             <h:form id="EstatusPeticionCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{estatusPeticionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEstatusPeticionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{estatusPeticionController.selected.id}" title="#{bundle.CreateEstatusPeticionTitle_id}" required="true" requiredMessage="#{bundle.CreateEstatusPeticionRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateEstatusPeticionLabel_nombreEstatus}" for="nombreEstatus" />
                         <p:inputText id="nombreEstatus" value="#{estatusPeticionController.selected.nombreEstatus}" title="#{bundle.CreateEstatusPeticionTitle_nombreEstatus}" required="true" requiredMessage="#{bundle.CreateEstatusPeticionRequiredMessage_nombreEstatus}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{estatusPeticionController.create}" value="#{bundle.Save}" update="display,:EstatusPeticionListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstatusPeticionCreateDialog');"/>
+                    <p:commandButton actionListener="#{estatusPeticionController.create}" value="#{bundle.Save}" update="display,:EstatusPeticionListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstatusPeticionCreateDialog');" onclick="EstatusPeticionCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EstatusPeticionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

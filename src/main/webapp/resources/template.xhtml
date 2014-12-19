@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><ui:insert name="title">SQS ITMA</ui:insert></title>
+        <h:outputStylesheet name="css/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/justified-nav.css"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <div class="container">
+
+            <div class="masthead">
+                <div class="col-md-12 clearfix">
+                    <div class="col-md-2">
+                        <h3 class="text-muted">SQS ITMA</h3>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="col-md-12" style="margin-top: 20px;">
+                            Sesion de: #{sesionManagedBean.usuario.email} | 
+                            <h:form style="display: inline;">
+                                <h:commandLink value="Salir" action="#{sesionManagedBean.logout()}" />
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div role="navigation" class="col-md-12 clearfix">
+                    <div class="row">
+                        <ul class="nav nav-justified">
+                            <li class="#{navManagedBean.active('/admin/index')}">
+                                <h:link outcome="/admin/index" value="Inicio"/>
+                            </li>
+                            <li class="#{navManagedBean.active('/admin/carrera')}">
+                                <h:link outcome="/admin/carrera/List" value="Carreras"/>
+                            </li>
+                            <li class="#{navManagedBean.active('/admin/departamento')}">
+                                <h:link outcome="/admin/departamento/List" value="Departamentos"/>
+                            </li>
+                            <li class="#{navManagedBean.active('/admin/estatusPeticion')}">
+                                <h:link outcome="/admin/estatusPeticion/List" value="Estatus Peticion"/>
+                            </li>
+                            <li class="#{navManagedBean.active('/admin/personalAtencion')}">
+                                <h:link outcome="/admin/personalAtencion/List" value="Personal Atencion"/>
+                            </li>
+                            <li class="#{navManagedBean.active('/admin/peticion')}">
+                                <h:link outcome="/admin/peticion/List" value="Peticiones"/>
+                            </li>
+                            <li class="#{navManagedBean.active('/admin/usuario')}">
+                                <h:link outcome="/admin/usuario/List" value="Usuarios"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-12">
+                    <ui:insert name="body"/>
+                </div>
+            </div>
+
+            <!-- Site footer -->
+            <footer class="footer">
+                <p>&copy; ITMA 2014 | Farias Sánchez Federico</p>
+            </footer>
+
+        </div> <!-- /container -->
+
+
+        <h:outputScript name="js/bootstrap.min.js" />
+        <h:outputScript name="js/ie-emulation-modes-warning.js" />
+        <h:outputScript name="js/ie10-viewport-bug-workaround.js" />
+    </h:body>
+
+</html>

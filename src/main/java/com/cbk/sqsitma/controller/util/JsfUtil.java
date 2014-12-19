@@ -6,6 +6,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpServletRequest;
 
 public class JsfUtil {
 
@@ -59,6 +60,15 @@ public class JsfUtil {
     public static Object getObjectFromRequestParameter(String requestParameterName, Converter converter, UIComponent component) {
         String theId = JsfUtil.getRequestParameter(requestParameterName);
         return converter.getAsObject(FacesContext.getCurrentInstance(), component, theId);
+    }
+
+    public static String active(String url) {
+        HttpServletRequest sr = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String path = sr.getRequestURI();
+        if (path.contains(url)) {
+            return "active";
+        }
+        return "";
     }
 
     public static enum PersistAction {

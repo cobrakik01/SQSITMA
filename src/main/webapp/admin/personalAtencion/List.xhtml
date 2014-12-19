@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="./../../resources/template.xhtml">
 
 
         <ui:define name="title">
@@ -45,13 +45,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPersonalAtencionTitle_estatusPeticionId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.estatusPeticionId}"/>
+                            <h:outputText value="#{item.estatusPeticionId.nombreEstatus}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPersonalAtencionTitle_peticionId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.peticionId}"/>
+                            <h:outputText value="#{item.peticionId.asunto}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

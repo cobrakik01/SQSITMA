@@ -12,12 +12,10 @@
             <h:form id="EstatusPeticionEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{estatusPeticionController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditEstatusPeticionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{estatusPeticionController.selected.id}" title="#{bundle.EditEstatusPeticionTitle_id}" required="true" requiredMessage="#{bundle.EditEstatusPeticionRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditEstatusPeticionLabel_nombreEstatus}" for="nombreEstatus" />
                         <p:inputText id="nombreEstatus" value="#{estatusPeticionController.selected.nombreEstatus}" title="#{bundle.EditEstatusPeticionTitle_nombreEstatus}" required="true" requiredMessage="#{bundle.EditEstatusPeticionRequiredMessage_nombreEstatus}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{estatusPeticionController.update}" value="#{bundle.Save}" update="display,:EstatusPeticionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstatusPeticionEditDialog');"/>
+                    <p:commandButton actionListener="#{estatusPeticionController.update}" value="#{bundle.Save}" update="display,:EstatusPeticionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstatusPeticionEditDialog');" onclick="EstatusPeticionEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EstatusPeticionEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -12,12 +12,10 @@
             <h:form id="CarreraEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{carreraController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditCarreraLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{carreraController.selected.id}" title="#{bundle.EditCarreraTitle_id}" required="true" requiredMessage="#{bundle.EditCarreraRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditCarreraLabel_nombreCarrera}" for="nombreCarrera" />
                         <p:inputText id="nombreCarrera" value="#{carreraController.selected.nombreCarrera}" title="#{bundle.EditCarreraTitle_nombreCarrera}" required="true" requiredMessage="#{bundle.EditCarreraRequiredMessage_nombreCarrera}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{carreraController.update}" value="#{bundle.Save}" update="display,:CarreraListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CarreraEditDialog');"/>
+                    <p:commandButton actionListener="#{carreraController.update}" value="#{bundle.Save}" update="display,:CarreraListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CarreraEditDialog');" onclick="CarreraEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CarreraEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
