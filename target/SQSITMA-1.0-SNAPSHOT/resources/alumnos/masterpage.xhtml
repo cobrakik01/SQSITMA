@@ -23,36 +23,47 @@
                         <h:graphicImage library="img" name="itma_logo.png" width="30" />
                         <h3 class="text-muted" style="margin: 0px; padding: 0px;">SQS ITMA</h3>
                     </div>
-                    <div class="col-md-10">
-                        <div class="col-md-12" style="margin-top: 20px;">
-                            Sesion de: #{sesionManagedBean.usuario.email} | 
-                            <h:form style="display: inline;">
-                                <h:commandLink value="Salir" action="#{sesionManagedBean.logout()}" />
-                            </h:form>
+                    <div class="col-md-6">
+                        <div class="col-md-12" style="margin-top: 10px;">
+                            <h5 class="text-muted" style="margin: 0px; padding: 0px;">
+                                Bienvenido #{sesionManagedBean.usuario.nombre} #{sesionManagedBean.usuario.app}
+                            </h5>
+                            <h3 class="text-capitalize" style="margin: 0px; padding: 0px;">
+                                Sistema de quejas y sugerencias ITMA
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-12" style="margin-top: 10px;">
+                            <div class="row">
+                                <div class="col-md-9 text-right">
+                                    <h5 class="text-muted" style="margin: 0px; padding: 0px;">
+                                        Carrera
+                                    </h5>
+                                    <h4 style="margin: 0px; padding: 0px;">
+                                        #{sesionManagedBean.usuario.carreraId.nombreCarrera}
+                                    </h4>
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <h:form style="display: inline;">
+                                        <h:commandLink action="#{sesionManagedBean.logout()}">
+                                            <h:graphicImage library="img" name="logout_24px.png" /> <br />
+                                            Salir
+                                        </h:commandLink>
+                                    </h:form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!--
-                <div role="navigation" class="col-md-12 clearfix">
-                    <div class="row">
-                        <ul class="nav nav-justified">
-                            <li class="#{navManagedBean.active('/alumnos/index')}">
-                                <h:link outcome="/alumnos/index" value="Inicio"/>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                -->
             </div>
 
-            <!-- Example row of columns -->
             <div class="row">
                 <div class="col-md-12">
                     <ui:insert name="body"/>
                 </div>
             </div>
 
-            <!-- Site footer -->
             <footer class="footer">
                 <p>&copy; ITMA 2014 | Farias Sánchez Federico</p>
             </footer>

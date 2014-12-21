@@ -13,7 +13,7 @@
         <ui:define name="body">
 
             <h:form id="PeticionListForm">
-                <h1><h:outputText value="Bienvenido #{sesionManagedBean.usuario.nombre} esta es tu #{bundle.ListPeticionTitle}"/></h1>
+                <h2 class="page-header"><h:outputText value="Esta es tu lista de peticiones"/></h2>
                 <p:dataTable id="datalist" value="#{alumnosManagedBean.peticiones}" var="item"
                              filteredValue="#{peticionController.filteredPeticiones}"
                              widgetVar="peticionesTableWidget"
