@@ -5,12 +5,13 @@
  */
 package com.cbk.sqsitma.controller.alumnos;
 
+import com.cbk.sqsitma.controller.PersonalAtencionFacade;
 import com.cbk.sqsitma.controller.PeticionFacade;
 import com.cbk.sqsitma.controller.UsuarioFacade;
 import com.cbk.sqsitma.controller.util.JsfUtil;
 import com.cbk.sqsitma.controller.util.JsfUtil.PersistAction;
 import com.cbk.sqsitma.controller.util.SesionManagedBean;
-import com.cbk.sqsitma.entity.Carrera;
+import com.cbk.sqsitma.entity.PersonalAtencion;
 import com.cbk.sqsitma.entity.Peticion;
 import com.cbk.sqsitma.entity.Usuario;
 import javax.inject.Named;
@@ -43,9 +44,14 @@ public class AlumnosManagedBean implements Serializable {
     @EJB
     private PeticionFacade peticionFacade;
 
+    @EJB
+    private PersonalAtencionFacade personalAtencionFacade;
+
     private List<Peticion> peticiones = null;
 
     private Peticion peticionSelected;
+
+    private List<PersonalAtencion> respuestasPeticionSeleccionada;
 
     @ManagedProperty(value = "#{sesionManagedBean}")
     private SesionManagedBean sesion;
@@ -54,6 +60,15 @@ public class AlumnosManagedBean implements Serializable {
      * Creates a new instance of AlumnosManagedBean
      */
     public AlumnosManagedBean() {
+    }
+
+    public List<PersonalAtencion> getRespuestasPeticionSeleccionada() {
+        respuestasPeticionSeleccionada = personalAtencionFacade.findAll(peticionSelected);
+        return respuestasPeticionSeleccionada;
+    }
+
+    public void setRespuestasPeticionSeleccionada(List<PersonalAtencion> respuestasPeticionSeleccionada) {
+        this.respuestasPeticionSeleccionada = respuestasPeticionSeleccionada;
     }
 
     public SesionManagedBean getSesion() {

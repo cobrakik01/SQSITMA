@@ -8,12 +8,44 @@
 
     <ui:composition>
 
-        <p:dialog id="RespuestasPeticionDlg" widgetVar="RespuestasPeticionDialog" modal="true" resizable="false" appendTo="@(body)" header="Respuestas de peticion">
+        <p:dialog id="RespuestasPeticionDlg" widgetVar="RespuestasPeticionDialog" modal="true" resizable="false" appendTo="@(body)" header="Respuestas de peticion" width="900">
             <h:form id="RespuestasPeticionForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{alumnosManagedBean.peticionSelected != null}">
-                        <p:outputLabel value="Se mostraran las respuestas de la peticion seleccionada." />
-                    </p:panelGrid>
+                    <div class="col-md-12 clearfix">
+                        <p:panelGrid columns="6" rendered="#{alumnosManagedBean.peticionSelected != null}">
+                            <h:outputText value="#{bundle.ViewPeticionLabel_asunto}"/>
+                            <h:outputText value="#{alumnosManagedBean.peticionSelected.asunto}" title="#{bundle.ViewPeticionTitle_asunto}"/>
+                            <h:outputText value="#{bundle.ViewPeticionLabel_peticion}"/>
+                            <h:outputText value="#{alumnosManagedBean.peticionSelected.peticion}" title="#{bundle.ViewPeticionTitle_peticion}"/>
+                            <h:outputText value="#{bundle.ViewPeticionLabel_createdAt}"/>
+                            <h:outputText value="#{alumnosManagedBean.peticionSelected.createdAt}" title="#{bundle.ViewPeticionTitle_createdAt}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:panelGrid>
+                    </div>
+
+                    <div class="col-md-12 clearfix">
+                        <p:dataTable id="RespuestasTable" value="#{alumnosManagedBean.respuestasPeticionSeleccionada}" var="item"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="5"
+                                     rowsPerPageTemplate="5,10"
+                                     >
+
+                            <p:column headerText="Estatus de peticion" sortBy="#{item.estatusPeticionId.nombreEstatus}">
+                                <h:outputText value="#{item.estatusPeticionId.nombreEstatus}"/>
+                            </p:column>
+                            <p:column headerText="Departamento" sortBy="#{item.personalEmail.departamentoId.nombreDepartamento}">
+                                <h:outputText value="#{item.personalEmail.departamentoId.nombreDepartamento}"/>
+                            </p:column>
+                            <p:column headerText="Fecha de respuesta" sortBy="#{item.createdAt}">
+                                <h:outputText value="#{item.createdAt}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+
                     <p:commandButton value="#{bundle.Cancel}" onclick="RespuestasPeticionDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
