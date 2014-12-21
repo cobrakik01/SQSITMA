@@ -24,12 +24,7 @@
                         <p:inputText id="apm" value="#{usuarioController.selected.apm}" title="#{bundle.EditUsuarioTitle_apm}" />
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_alumno}" for="alumno" />
                         <p:selectBooleanCheckbox id="alumno" value="#{usuarioController.selected.alumno}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_alumno}"/>
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.EditUsuarioTitle_password}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_password}"/>
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_createdAt}" for="createdAt" />
-                        <p:calendar id="createdAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuarioController.selected.createdAt}" title="#{bundle.EditUsuarioTitle_createdAt}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_createdAt}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditUsuarioLabel_updatedAt}" for="updatedAt" />
-                        <p:calendar id="updatedAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuarioController.selected.updatedAt}" title="#{bundle.EditUsuarioTitle_updatedAt}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_updatedAt}" showOn="button"/>
+                        
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_carreraId}" for="carreraId" />
                         <p:selectOneMenu id="carreraId" value="#{usuarioController.selected.carreraId}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -45,7 +40,7 @@
                                            itemValue="#{departamentoIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
+                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');" onclick="UsuarioEditDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

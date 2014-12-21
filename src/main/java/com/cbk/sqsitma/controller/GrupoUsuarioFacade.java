@@ -6,6 +6,8 @@
 package com.cbk.sqsitma.controller;
 
 import com.cbk.sqsitma.entity.GrupoUsuario;
+import com.cbk.sqsitma.entity.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class GrupoUsuarioFacade extends AbstractFacade<GrupoUsuario> {
+
     @PersistenceContext(unitName = "com.cbk.sqsitma_SQSITMA_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -27,5 +30,13 @@ public class GrupoUsuarioFacade extends AbstractFacade<GrupoUsuario> {
     public GrupoUsuarioFacade() {
         super(GrupoUsuario.class);
     }
-    
+
+    public GrupoUsuario findByEmail(String email) {
+        GrupoUsuario gu = null;
+        List<GrupoUsuario> l = getEntityManager().createNamedQuery("GrupoUsuario.findByUsuariosEmail").setParameter("usuariosEmail", email).getResultList();
+        if (l.size() > 0) {
+            gu = l.get(0);
+        }
+        return gu;
+    }
 }

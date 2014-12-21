@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:composition template="./../resources/alumnos/masterpage.xhtml">
+
+        <ui:define name="body">
+
+            <h:form id="PeticionListForm">
+                <h1><h:outputText value="#{bundle.ListPeticionTitle}"/></h1>
+                <p:dataTable id="datalist" value="#{alumnosManagedBean.peticiones}" var="item"
+                             selectionMode="single" selection="#{alumnosManagedBean.peticionSelected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <p:column headerText="#{bundle.ListPeticionTitle_asunto}">
+                        <h:outputText value="#{item.asunto}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ListPeticionTitle_peticion}">
+                        <h:outputText value="#{item.peticion}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ListPeticionTitle_createdAt}">
+                        <h:outputText value="#{item.createdAt}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="#{bundle.ListPeticionTitle_usuarioEmail}">
+                        <h:outputText value="#{item.usuarioEmail}"/>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{alumnosManagedBean.preCreationPeticion}" update=":PeticionCreateForm" oncomplete="PF('PeticionCreateDialog').show()" />
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+            <ui:include src="nuevaPeticion.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

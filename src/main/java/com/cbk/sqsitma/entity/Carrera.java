@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Carrera.findById", query = "SELECT c FROM Carrera c WHERE c.id = :id"),
     @NamedQuery(name = "Carrera.findByNombreCarrera", query = "SELECT c FROM Carrera c WHERE c.nombreCarrera = :nombreCarrera")})
 public class Carrera implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -108,7 +109,10 @@ public class Carrera implements Serializable {
 
     @Override
     public String toString() {
+        if (nombreCarrera != null) {
+            return nombreCarrera;
+        }
         return "com.cbk.sqsitma.entity.Carrera[ id=" + id + " ]";
     }
-    
+
 }

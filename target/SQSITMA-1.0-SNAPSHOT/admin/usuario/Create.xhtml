@@ -24,26 +24,23 @@
                         <p:inputText id="apm" value="#{usuarioController.selected.apm}" title="#{bundle.CreateUsuarioTitle_apm}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_alumno}" for="alumno" />
                         <p:selectBooleanCheckbox id="alumno" value="#{usuarioController.selected.alumno}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_alumno}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_password}" for="password" />
-                        <p:inputText id="password" value="#{usuarioController.selected.password}" title="#{bundle.CreateUsuarioTitle_password}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_password}"/>
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_createdAt}" for="createdAt" />
-                        <p:calendar id="createdAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuarioController.selected.createdAt}" title="#{bundle.EditUsuarioTitle_createdAt}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_createdAt}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_updatedAt}" for="updatedAt" />
-                        <p:calendar id="updatedAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{usuarioController.selected.updatedAt}" title="#{bundle.EditUsuarioTitle_updatedAt}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_updatedAt}" showOn="button"/>
+                        
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_carreraId}" for="carreraId" />
                         <p:selectOneMenu id="carreraId" value="#{usuarioController.selected.carreraId}" >
                             <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"
                                            var="carreraIdItem"
                                            itemValue="#{carreraIdItem}"/>
                         </p:selectOneMenu>
+                        
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_departamentoId}" for="departamentoId" />
                         <p:selectOneMenu id="departamentoId" value="#{usuarioController.selected.departamentoId}" >
                             <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
                                            var="departamentoIdItem"
                                            itemValue="#{departamentoIdItem}"/>
                         </p:selectOneMenu>
+                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
+                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');" onclick="UsuarioCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

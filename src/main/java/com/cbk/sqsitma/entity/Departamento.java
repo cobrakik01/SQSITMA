@@ -108,6 +108,9 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
+        if(nombreDepartamento != null) {
+            return nombreDepartamento;
+        }
         return "com.cbk.sqsitma.entity.Departamento[ id=" + id + " ]";
     }
     

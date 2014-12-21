@@ -3,8 +3,10 @@ package com.cbk.sqsitma.controller;
 import com.cbk.sqsitma.entity.Usuario;
 import com.cbk.sqsitma.controller.util.JsfUtil;
 import com.cbk.sqsitma.controller.util.JsfUtil.PersistAction;
+import com.cbk.sqsitma.entity.GrupoUsuario;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,6 +23,9 @@ import javax.faces.convert.FacesConverter;
 @Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
+
+    @EJB
+    private GrupoUsuarioFacade grupoUsuarioFacade;
 
     @EJB
     private com.cbk.sqsitma.controller.UsuarioFacade ejbFacade;
@@ -55,14 +60,29 @@ public class UsuarioController implements Serializable {
     }
 
     public void create() {
+        selected.setPassword(JsfUtil.hashMake(selected.getClave()));
+        selected.setCreatedAt(new Date());
+        selected.setUpdatedAt(selected.getCreatedAt());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioCreated"));
+        String grupo = "alumnos";
+        if (!selected.getAlumno()) {
+            grupo = "admin";
+        }
+        grupoUsuarioFacade.create(new GrupoUsuario(grupo, selected.getEmail()));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
+        selected.setUpdatedAt(new Date());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
+        grupoUsuarioFacade.remove(grupoUsuarioFacade.findByEmail(selected.getEmail()));
+        String grupo = "admin";
+        if (selected.getAlumno()) {
+            grupo = "alumnos";
+        }
+        grupoUsuarioFacade.create(new GrupoUsuario(grupo, selected.getEmail()));
     }
 
     public void destroy() {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PeticionCreateDlg" widgetVar="PeticionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePeticionTitle}">
+            <h:form id="PeticionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alumnosManagedBean.peticionSelected != null}">
+                        <p:outputLabel value="Asunto:" for="asunto" />
+                        <p:inputText id="asunto" value="#{alumnosManagedBean.peticionSelected.asunto}" title="Asunto" required="true" requiredMessage="The Asunto field is required."/>
+                        <p:outputLabel value="Peticion:" for="peticion" />
+                        <p:inputText id="peticion" value="#{alumnosManagedBean.peticionSelected.peticion}" title="Peticion" required="true" requiredMessage="The Peticion field is required."/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{alumnosManagedBean.createPeticion}" value="#{bundle.Save}" update="display,:PeticionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PeticionCreateDialog');" onclick="PeticionCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PeticionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

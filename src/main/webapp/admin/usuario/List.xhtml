@@ -27,75 +27,34 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_email}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.email}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_clave}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_clave}">
                             <h:outputText value="#{item.clave}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_nombre}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_email}">
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_nombre}">
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_app}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_app}">
                             <h:outputText value="#{item.app}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_apm}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_apm}">
                             <h:outputText value="#{item.apm}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_alumno}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_alumno}">
                             <p:selectBooleanCheckbox value="#{item.alumno}" disabled="true"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_password}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.password}"/>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_carreraId}">
+                            <h:outputText value="#{item.carreraId.nombreCarrera}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_createdAt}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_departamentoId}">
+                            <h:outputText value="#{item.departamentoId.nombreDepartamento}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListUsuarioTitle_createdAt}">
                             <h:outputText value="#{item.createdAt}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_updatedAt}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.updatedAt}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_carreraId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.carreraId}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_departamentoId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.departamentoId}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>

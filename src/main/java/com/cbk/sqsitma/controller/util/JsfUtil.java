@@ -1,5 +1,9 @@
 package com.cbk.sqsitma.controller.util;
 
+import com.cbk.sqsitma.controller.UsuarioFacade;
+import com.cbk.sqsitma.entity.Usuario;
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -63,12 +67,20 @@ public class JsfUtil {
     }
 
     public static String active(String url) {
-        HttpServletRequest sr = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpServletRequest sr = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String path = sr.getRequestURI();
         if (path.contains(url)) {
             return "active";
         }
         return "";
+    }
+
+    public static String hashMake(String password) {
+        return Hashing.sha256().hashString(password, Charsets.UTF_8).toString();
+    }
+
+    public static Usuario getUserSession(UsuarioFacade usuarioFacade) {
+        return usuarioFacade.findByEmail(FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName());
     }
 
     public static enum PersistAction {

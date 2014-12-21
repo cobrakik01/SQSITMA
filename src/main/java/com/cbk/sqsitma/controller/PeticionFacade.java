@@ -6,6 +6,8 @@
 package com.cbk.sqsitma.controller;
 
 import com.cbk.sqsitma.entity.Peticion;
+import com.cbk.sqsitma.entity.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +28,14 @@ public class PeticionFacade extends AbstractFacade<Peticion> {
 
     public PeticionFacade() {
         super(Peticion.class);
+    }
+    
+    public List<Peticion> findAll(Usuario usuario) {
+        return this.findAll(usuario.getEmail());
+    }
+    
+    public List<Peticion> findAll(String email) {
+        return getEntityManager().createNamedQuery("Peticion.findByEmail").setParameter("email", email).getResultList();
     }
     
 }
