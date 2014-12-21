@@ -22,6 +22,9 @@
                              rowsPerPageTemplate="10,20,30,40,50"
                              >
 
+                    <p:ajax event="rowSelect"   update="createButton btnVerDetalles"/>
+                    <p:ajax event="rowUnselect" update="createButton btnVerDetalles"/>
+
                     <p:column headerText="#{bundle.ListPeticionTitle_asunto}">
                         <h:outputText value="#{item.asunto}"/>
                     </p:column>
@@ -37,13 +40,19 @@
                         <h:outputText value="#{item.usuarioEmail}"/>
                     </p:column>
 
+                    <p:column headerText="Revisiones">
+                        <h:outputText value="#{item.personalAtencionList.size()}"/>
+                    </p:column>
+
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus" value="#{bundle.Create}" actionListener="#{alumnosManagedBean.preCreationPeticion}" update=":PeticionCreateForm" oncomplete="PF('PeticionCreateDialog').show()" />
+                        <p:commandButton id="btnVerDetalles" icon="ui-icon-plus" value="#{bundle.View}" update=":RespuestasPeticionForm" oncomplete="PF('RespuestasPeticionDialog').show()" disabled="#{alumnosManagedBean.peticionSelected == null}" />
                     </f:facet>
                 </p:dataTable>
             </h:form>
 
             <ui:include src="nuevaPeticion.xhtml"/>
+            <ui:include src="respuestasPeticion.xhtml"/>
         </ui:define>
     </ui:composition>
 

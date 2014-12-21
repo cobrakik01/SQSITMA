@@ -34,8 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "PersonalAtencion.findAll", query = "SELECT p FROM PersonalAtencion p"),
     @NamedQuery(name = "PersonalAtencion.findById", query = "SELECT p FROM PersonalAtencion p WHERE p.id = :id"),
-    @NamedQuery(name = "PersonalAtencion.findByCreatedAt", query = "SELECT p FROM PersonalAtencion p WHERE p.createdAt = :createdAt")})
+    @NamedQuery(name = "PersonalAtencion.findByCreatedAt", query = "SELECT p FROM PersonalAtencion p WHERE p.createdAt = :createdAt"),
+    @NamedQuery(name = "PersonalAtencion.findByPeticion", query = "SELECT p FROM PersonalAtencion p WHERE p.peticionId = :peticion")})
 public class PersonalAtencion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -133,5 +135,5 @@ public class PersonalAtencion implements Serializable {
     public String toString() {
         return "com.cbk.sqsitma.entity.PersonalAtencion[ id=" + id + " ]";
     }
-    
+
 }

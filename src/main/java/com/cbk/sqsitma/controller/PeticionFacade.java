@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PeticionFacade extends AbstractFacade<Peticion> {
+
     @PersistenceContext(unitName = "com.cbk.sqsitma_SQSITMA_war_1.0-SNAPSHOTPU")
     private EntityManager em;
 
@@ -29,13 +30,9 @@ public class PeticionFacade extends AbstractFacade<Peticion> {
     public PeticionFacade() {
         super(Peticion.class);
     }
-    
+
     public List<Peticion> findAll(Usuario usuario) {
-        return this.findAll(usuario.getEmail());
+        return getEntityManager().createNamedQuery("Peticion.findByEmail").setParameter("email", usuario).getResultList();
     }
-    
-    public List<Peticion> findAll(String email) {
-        return getEntityManager().createNamedQuery("Peticion.findByEmail").setParameter("email", email).getResultList();
-    }
-    
+
 }

@@ -70,7 +70,8 @@ public class AlumnosManagedBean implements Serializable {
 
     public List<Peticion> getPeticiones() {
         if (peticiones == null) {
-            peticiones = peticionFacade.findAll();
+            Usuario us = JsfUtil.getUserSession(usuarioFacade);
+            peticiones = peticionFacade.findAll(us);
         }
         return peticiones;
     }

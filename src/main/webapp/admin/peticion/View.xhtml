@@ -8,28 +8,61 @@
 
     <ui:composition>
 
-        <p:dialog id="PeticionViewDlg" widgetVar="PeticionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPeticionTitle}">
+        <p:dialog id="PeticionViewDlg" widgetVar="PeticionViewDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.ViewPeticionTitle}" width="800">
             <h:form id="PeticionViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{peticionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPeticionLabel_id}"/>
-                        <h:outputText value="#{peticionController.selected.id}" title="#{bundle.ViewPeticionTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewPeticionLabel_asunto}"/>
-                        <h:outputText value="#{peticionController.selected.asunto}" title="#{bundle.ViewPeticionTitle_asunto}"/>
-                        <h:outputText value="#{bundle.ViewPeticionLabel_peticion}"/>
-                        <h:outputText value="#{peticionController.selected.peticion}" title="#{bundle.ViewPeticionTitle_peticion}"/>
-                        <h:outputText value="#{bundle.ViewPeticionLabel_createdAt}"/>
-                        <h:outputText value="#{peticionController.selected.createdAt}" title="#{bundle.ViewPeticionTitle_createdAt}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewPeticionLabel_updatedAt}"/>
-                        <h:outputText value="#{peticionController.selected.updatedAt}" title="#{bundle.ViewPeticionTitle_updatedAt}">
-                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                        </h:outputText>
-                        <h:outputText value="#{bundle.ViewPeticionLabel_usuarioEmail}"/>
-                        <h:outputText value="#{peticionController.selected.usuarioEmail}" title="#{bundle.ViewPeticionTitle_usuarioEmail}"/>
-                    </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="PeticionViewDialog.hide()"/>
+
+                    <div class="col-md-12 clearfix">
+                        <p:panelGrid columns="2" rendered="#{peticionController.selected != null}">
+                            <h:outputText value="#{bundle.ViewPeticionLabel_asunto}"/>
+                            <h:outputText value="#{peticionController.selected.asunto}" title="#{bundle.ViewPeticionTitle_asunto}"/>
+                            <h:outputText value="#{bundle.ViewPeticionLabel_peticion}"/>
+                            <h:outputText value="#{peticionController.selected.peticion}" title="#{bundle.ViewPeticionTitle_peticion}"/>
+                            <h:outputText value="#{bundle.ViewPeticionLabel_createdAt}"/>
+                            <h:outputText value="#{peticionController.selected.createdAt}" title="#{bundle.ViewPeticionTitle_createdAt}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:panelGrid>
+                    </div>
+                    <div class="col-md-12 clearfix">
+                        <p:dataTable value="#{peticionController.respuestasPeticionSeleccionada}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CreatedAt"/>
+                                </f:facet>
+                                <h:outputText value="#{item.createdAt}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="EstatusPeticionId"/>
+                                </f:facet>
+                                <h:outputText value="#{item.estatusPeticionId}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PeticionId"/>
+                                </f:facet>
+                                <h:outputText value="#{item.peticionId}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PersonalEmail"/>
+                                </f:facet>
+                                <h:outputText value="#{item.personalEmail}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                    <div class="col-md-12 clearfix">
+                        <p:commandButton value="#{bundle.Close}" onclick="PeticionViewDialog.hide()"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -24,54 +24,28 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeticionTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeticionTitle_asunto}"/>
-                            </f:facet>
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
+                        
+                        <p:column headerText="#{bundle.ListPeticionTitle_asunto}">
                             <h:outputText value="#{item.asunto}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeticionTitle_peticion}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListPeticionTitle_peticion}">
                             <h:outputText value="#{item.peticion}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeticionTitle_createdAt}"/>
-                            </f:facet>
+                        <p:column headerText="#{bundle.ListPeticionTitle_createdAt}">
                             <h:outputText value="#{item.createdAt}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeticionTitle_updatedAt}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.updatedAt}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
+                        <p:column headerText="Respuestas">
+                            <h:outputText value="#{peticionController.respuestasPorPeticion(item).size()}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPeticionTitle_usuarioEmail}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.usuarioEmail}"/>
+                        <p:column headerText="Estatus">
+                            <h:outputText value="#{peticionController.estatusPeticion(item)}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{peticionController.prepareCreate}" update=":PeticionCreateForm" oncomplete="PF('PeticionCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PeticionViewForm" oncomplete="PF('PeticionViewDialog').show()" disabled="#{empty peticionController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PeticionEditForm" oncomplete="PF('PeticionEditDialog').show()" disabled="#{empty peticionController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{peticionController.destroy}" update=":growl,datalist" disabled="#{empty peticionController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver respuestas" update=":PeticionViewForm" oncomplete="PF('PeticionViewDialog').show()" disabled="#{empty peticionController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -3,6 +3,7 @@ package com.cbk.sqsitma.controller;
 import com.cbk.sqsitma.entity.Peticion;
 import com.cbk.sqsitma.controller.util.JsfUtil;
 import com.cbk.sqsitma.controller.util.JsfUtil.PersistAction;
+import com.cbk.sqsitma.entity.PersonalAtencion;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,6 +22,9 @@ import javax.faces.convert.FacesConverter;
 @Named("peticionController")
 @SessionScoped
 public class PeticionController implements Serializable {
+
+    @EJB
+    private PersonalAtencionFacade personalAtencionFacade;
 
     @EJB
     private com.cbk.sqsitma.controller.PeticionFacade ejbFacade;
@@ -159,6 +163,29 @@ public class PeticionController implements Serializable {
             }
         }
 
+    }
+
+    public String estatusPeticion(Peticion peticion) {
+        List<PersonalAtencion> l = personalAtencionFacade.findAll(peticion);
+        if (l.size() > 0) {
+            return l.get(0).getEstatusPeticionId().getNombreEstatus();
+        }
+        return "Si respuesta";
+    }
+
+    private List<PersonalAtencion> respuestasPeticionSeleccionada;
+
+    public List<PersonalAtencion> respuestasPorPeticion(Peticion peticion) {
+        return personalAtencionFacade.findAll(peticion);
+    }
+
+    public List<PersonalAtencion> getRespuestasPeticionSeleccionada() {
+        respuestasPeticionSeleccionada = personalAtencionFacade.findAll(selected);
+        return respuestasPeticionSeleccionada;
+    }
+
+    public void setRespuestasPeticionSeleccionada(List<PersonalAtencion> respuestasPeticionSeleccionada) {
+        this.respuestasPeticionSeleccionada = respuestasPeticionSeleccionada;
     }
 
 }
