@@ -34,9 +34,14 @@
                 <div role="navigation" class="col-md-12 clearfix">
                     <div class="row">
                         <ul class="nav nav-justified">
+                            <li class="#{navManagedBean.active('/admin/peticion')}">
+                                <h:link outcome="/admin/peticion/List" value="Inicio"/>
+                            </li>
+                            <!--
                             <li class="#{navManagedBean.active('/admin/index')}">
                                 <h:link outcome="/admin/index" value="Inicio"/>
                             </li>
+                            -->
                             <li class="#{navManagedBean.active('/admin/carrera')}">
                                 <h:link outcome="/admin/carrera/List" value="Carreras"/>
                             </li>
@@ -51,9 +56,6 @@
                                 <h:link outcome="/admin/personalAtencion/List" value="Personal Atencion"/>
                             </li>
                             -->
-                            <li class="#{navManagedBean.active('/admin/peticion')}">
-                                <h:link outcome="/admin/peticion/List" value="Peticiones"/>
-                            </li>
                             <li class="#{navManagedBean.active('/admin/usuario')}">
                                 <h:link outcome="/admin/usuario/List" value="Usuarios"/>
                             </li>

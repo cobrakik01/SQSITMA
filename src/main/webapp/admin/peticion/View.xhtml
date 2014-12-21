@@ -8,12 +8,23 @@
 
     <ui:composition>
 
-        <p:dialog id="PeticionViewDlg" widgetVar="PeticionViewDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.ViewPeticionTitle}" width="800">
+        <p:dialog id="PeticionViewDlg" widgetVar="PeticionViewDialog" modal="true" resizable="true" appendTo="@(body)" header="#{bundle.ViewPeticionTitle}" width="900">
             <h:form id="PeticionViewForm">
                 <h:panelGroup id="display">
 
                     <div class="col-md-12 clearfix">
-                        <p:panelGrid columns="2" rendered="#{peticionController.selected != null}">
+                        <p:panelGrid columns="3">
+                            <p:outputLabel value="Estatus:" for="estatusPeticionId" />
+                            <p:selectOneMenu id="estatusPeticionId" value="#{peticionController.estatusPeticion}" required="true" requiredMessage="The EstatusPeticionId field is required.">
+                                <!-- TODO: update below reference to list of available items-->
+                                <f:selectItems value="#{peticionController.listaEstatusPeticion}" var="estatus" itemLabel="#{estatus.nombreEstatus}"/>
+                            </p:selectOneMenu>
+                            <p:commandButton value="Responder" actionListener="#{peticionController.responderPeticion()}" update="RespuestasTable,:growl, :PeticionListForm:datalist" />
+                        </p:panelGrid>
+                    </div>
+
+                    <div class="col-md-12 clearfix">
+                        <p:panelGrid columns="6" rendered="#{peticionController.selected != null}">
                             <h:outputText value="#{bundle.ViewPeticionLabel_asunto}"/>
                             <h:outputText value="#{peticionController.selected.asunto}" title="#{bundle.ViewPeticionTitle_asunto}"/>
                             <h:outputText value="#{bundle.ViewPeticionLabel_peticion}"/>
@@ -24,39 +35,28 @@
                             </h:outputText>
                         </p:panelGrid>
                     </div>
+
                     <div class="col-md-12 clearfix">
-                        <p:dataTable value="#{peticionController.respuestasPeticionSeleccionada}" var="item">
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
-                                <h:outputText value="#{item.id}"/>
+                        <p:dataTable id="RespuestasTable" value="#{peticionController.respuestasPeticionSeleccionada}" var="item"
+                                     paginator="true"
+                                     rowKey="#{item.id}"
+                                     rows="5"
+                                     rowsPerPageTemplate="5,10"
+                                     >
+
+                            <p:column headerText="Estatus de peticion" sortBy="#{item.estatusPeticionId.nombreEstatus}">
+                                <h:outputText value="#{item.estatusPeticionId.nombreEstatus}"/>
                             </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="CreatedAt"/>
-                                </f:facet>
+                            <p:column headerText="Personal de atencion" sortBy="#{item.personalEmail.nombre}">
+                                <h:outputText value="#{item.personalEmail.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Departamento" sortBy="#{item.personalEmail.departamentoId.nombreDepartamento}">
+                                <h:outputText value="#{item.personalEmail.departamentoId.nombreDepartamento}"/>
+                            </p:column>
+                            <p:column headerText="Fecha de respuesta" sortBy="#{item.createdAt}">
                                 <h:outputText value="#{item.createdAt}">
                                     <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                                 </h:outputText>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="EstatusPeticionId"/>
-                                </f:facet>
-                                <h:outputText value="#{item.estatusPeticionId}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="PeticionId"/>
-                                </f:facet>
-                                <h:outputText value="#{item.peticionId}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="PersonalEmail"/>
-                                </f:facet>
-                                <h:outputText value="#{item.personalEmail}"/>
                             </p:column>
                         </p:dataTable>
                     </div>

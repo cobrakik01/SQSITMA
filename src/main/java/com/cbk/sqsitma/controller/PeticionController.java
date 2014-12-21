@@ -3,9 +3,12 @@ package com.cbk.sqsitma.controller;
 import com.cbk.sqsitma.entity.Peticion;
 import com.cbk.sqsitma.controller.util.JsfUtil;
 import com.cbk.sqsitma.controller.util.JsfUtil.PersistAction;
+import com.cbk.sqsitma.entity.EstatusPeticion;
 import com.cbk.sqsitma.entity.PersonalAtencion;
+import com.cbk.sqsitma.entity.Usuario;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,14 +27,57 @@ import javax.faces.convert.FacesConverter;
 public class PeticionController implements Serializable {
 
     @EJB
+    private UsuarioFacade usuarioFacade;
+
+    @EJB
+    private EstatusPeticionFacade estatusPeticionFacade;
+
+    @EJB
     private PersonalAtencionFacade personalAtencionFacade;
 
     @EJB
     private com.cbk.sqsitma.controller.PeticionFacade ejbFacade;
+    private List<Peticion> filteredPeticiones;
     private List<Peticion> items = null;
     private Peticion selected;
+    private PersonalAtencion personalAtencion;
+    private EstatusPeticion estatusPeticion;
+    private List<EstatusPeticion> listaEstatusPeticion;
 
     public PeticionController() {
+    }
+
+    public List<Peticion> getFilteredPeticiones() {
+        return filteredPeticiones;
+    }
+
+    public void setFilteredPeticiones(List<Peticion> filteredPeticiones) {
+        this.filteredPeticiones = filteredPeticiones;
+    }
+
+    public List<EstatusPeticion> getListaEstatusPeticion() {
+        listaEstatusPeticion = estatusPeticionFacade.findAll();
+        return listaEstatusPeticion;
+    }
+
+    public void setListaEstatusPeticion(List<EstatusPeticion> listaEstatusPeticion) {
+        this.listaEstatusPeticion = listaEstatusPeticion;
+    }
+
+    public EstatusPeticion getEstatusPeticion() {
+        return estatusPeticion;
+    }
+
+    public void setEstatusPeticion(EstatusPeticion estatusPeticion) {
+        this.estatusPeticion = estatusPeticion;
+    }
+
+    public PersonalAtencion getPersonalAtencion() {
+        return personalAtencion;
+    }
+
+    public void setPersonalAtencion(PersonalAtencion personalAtencion) {
+        this.personalAtencion = personalAtencion;
     }
 
     public Peticion getSelected() {
@@ -170,7 +216,7 @@ public class PeticionController implements Serializable {
         if (l.size() > 0) {
             return l.get(0).getEstatusPeticionId().getNombreEstatus();
         }
-        return "Si respuesta";
+        return "Sin respuesta";
     }
 
     private List<PersonalAtencion> respuestasPeticionSeleccionada;
@@ -186,6 +232,27 @@ public class PeticionController implements Serializable {
 
     public void setRespuestasPeticionSeleccionada(List<PersonalAtencion> respuestasPeticionSeleccionada) {
         this.respuestasPeticionSeleccionada = respuestasPeticionSeleccionada;
+    }
+
+    public PersonalAtencion prepareCreatePersonalAtencion() {
+        personalAtencion = new PersonalAtencion();
+        estatusPeticion = new EstatusPeticion();
+        return personalAtencion;
+    }
+
+    public void responderPeticion() {
+        Peticion peticionSeleccionada = selected;
+        EstatusPeticion estatusSeleccionado = estatusPeticion;
+        Usuario usuarioQueAtiende = JsfUtil.getUserSession(usuarioFacade);
+
+        PersonalAtencion respuesta = new PersonalAtencion();
+        respuesta.setCreatedAt(new Date());
+        respuesta.setEstatusPeticionId(estatusSeleccionado);
+        respuesta.setPersonalEmail(usuarioQueAtiende);
+        respuesta.setPeticionId(peticionSeleccionada);
+        personalAtencionFacade.create(respuesta);
+
+        JsfUtil.addSuccessMessage("Se registro la respuesta correctamente.");
     }
 
 }

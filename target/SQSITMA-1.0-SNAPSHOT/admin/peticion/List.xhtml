@@ -17,6 +17,8 @@
             <h:form id="PeticionListForm">
                 <p:panel header="#{bundle.ListPeticionTitle}">
                     <p:dataTable id="datalist" value="#{peticionController.items}" var="item"
+                                 filteredValue="#{peticionController.filteredPeticiones}"
+                                 widgetVar="peticionesTableWidget"
                                  selectionMode="single" selection="#{peticionController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
@@ -26,26 +28,33 @@
 
                         <p:ajax event="rowSelect"   update="viewButton"/>
                         <p:ajax event="rowUnselect" update="viewButton"/>
-                        
-                        <p:column headerText="#{bundle.ListPeticionTitle_asunto}">
+
+                        <p:column headerText="#{bundle.ListPeticionTitle_asunto}" filterBy="#{item.asunto}" filterMatchMode="contains">
                             <h:outputText value="#{item.asunto}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListPeticionTitle_peticion}">
+                        <p:column headerText="#{bundle.ListPeticionTitle_peticion}" filterBy="#{item.peticion}" filterMatchMode="contains">
                             <h:outputText value="#{item.peticion}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListPeticionTitle_createdAt}">
+                        <p:column headerText="Respuestas" sortBy="#{peticionController.respuestasPorPeticion(item).size()}">
+                            <h:outputText value="#{peticionController.respuestasPorPeticion(item).size()}"/>
+                        </p:column>
+                        <p:column headerText="Estatus" filterBy="#{peticionController.estatusPeticion(item)}" filterMatchMode="exact">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('peticionesTableWidget').filter()">
+                                    <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+                                    <f:selectItem itemLabel="Sin respuesta" itemValue="Sin respuesta"/>
+                                    <f:selectItems value="#{peticionController.listaEstatusPeticion}"/>
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{peticionController.estatusPeticion(item)}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ListPeticionTitle_createdAt}" sortBy="#{item.createdAt}">
                             <h:outputText value="#{item.createdAt}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
-                        <p:column headerText="Respuestas">
-                            <h:outputText value="#{peticionController.respuestasPorPeticion(item).size()}"/>
-                        </p:column>
-                        <p:column headerText="Estatus">
-                            <h:outputText value="#{peticionController.estatusPeticion(item)}"/>
-                        </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="Ver respuestas" update=":PeticionViewForm" oncomplete="PF('PeticionViewDialog').show()" disabled="#{empty peticionController.selected}"/>
+                            <p:commandButton id="viewButton" icon="ui-icon-search" value="Ver respuestas" update=":PeticionViewForm" oncomplete="PF('PeticionViewDialog').show()" disabled="#{empty peticionController.selected}" actionListener="#{peticionController.prepareCreatePersonalAtencion}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

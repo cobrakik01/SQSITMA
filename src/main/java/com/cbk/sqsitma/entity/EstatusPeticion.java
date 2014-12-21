@@ -109,6 +109,9 @@ public class EstatusPeticion implements Serializable {
 
     @Override
     public String toString() {
+        if(nombreEstatus != null){
+            return nombreEstatus;
+        }
         return "com.cbk.sqsitma.entity.EstatusPeticion[ id=" + id + " ]";
     }
     
