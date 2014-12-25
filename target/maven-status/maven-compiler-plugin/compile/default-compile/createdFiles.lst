@@ -22,6 +22,7 @@ com\cbk\sqsitma\entity\PersonalAtencion_.class
 com\cbk\sqsitma\controller\DepartamentoController.class
 com\cbk\sqsitma\controller\PeticionFacade.class
 com\cbk\sqsitma\entity\EstatusPeticion.class
+com\cbk\sqsitma\controller\util\SesionManagedBean.class
 com\cbk\sqsitma\controller\DepartamentoFacade.class
 com\cbk\sqsitma\controller\PeticionController$PeticionControllerConverter.class
 com\cbk\sqsitma\controller\EstatusPeticionController$EstatusPeticionControllerConverter.class
@@ -30,10 +31,13 @@ com\cbk\sqsitma\controller\PersonalAtencionFacade.class
 com\cbk\sqsitma\controller\util\JsfUtil.class
 com\cbk\sqsitma\entity\PersonalAtencion.class
 com\cbk\sqsitma\controller\PersonalAtencionController$PersonalAtencionControllerConverter.class
+com\cbk\sqsitma\controller\alumnos\AlumnosManagedBean$PeticionControllerConverter.class
 com\cbk\sqsitma\controller\GrupoUsuarioController.class
 com\cbk\sqsitma\entity\Departamento.class
 com\cbk\sqsitma\entity\GrupoUsuario_.class
+com\cbk\sqsitma\controller\util\NavManagedBean.class
 com\cbk\sqsitma\controller\UsuarioController$UsuarioControllerConverter.class
+com\cbk\sqsitma\controller\alumnos\AlumnosManagedBean.class
 com\cbk\sqsitma\controller\PersonalAtencionController.class
 com\cbk\sqsitma\entity\GrupoUsuarioPK.class
 com\cbk\sqsitma\entity\EstatusPeticion_.class

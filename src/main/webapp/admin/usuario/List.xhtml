@@ -16,9 +16,17 @@
         <ui:define name="body">
             <h:form id="UsuarioListForm">
                 <p:panel header="#{bundle.ListUsuarioTitle}">
+                    
+                    <h:commandLink>
+                        <p:graphicImage name="/img/pdf.png" />
+                        <p:dataExporter type="pdf" target="datalist" fileName="usuarios" />
+                        Generar Reporte.
+                    </h:commandLink>
+                    
                     <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
                                  selectionMode="single" selection="#{usuarioController.selected}"
                                  paginator="true"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                  rowKey="#{item.email}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"

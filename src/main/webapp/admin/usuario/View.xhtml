@@ -24,8 +24,6 @@
                         <h:outputText value="#{usuarioController.selected.apm}" title="#{bundle.ViewUsuarioTitle_apm}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_alumno}"/>
                         <p:selectBooleanCheckbox value="#{usuarioController.selected.alumno}" disabled="true"/>
-                        <h:outputText value="#{bundle.ViewUsuarioLabel_password}"/>
-                        <h:outputText value="#{usuarioController.selected.password}" title="#{bundle.ViewUsuarioTitle_password}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_createdAt}"/>
                         <h:outputText value="#{usuarioController.selected.createdAt}" title="#{bundle.ViewUsuarioTitle_createdAt}">
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
@@ -35,9 +33,9 @@
                             <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                         </h:outputText>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_carreraId}"/>
-                        <h:outputText value="#{usuarioController.selected.carreraId}" title="#{bundle.ViewUsuarioTitle_carreraId}"/>
+                        <h:outputText value="#{usuarioController.selected.carreraId.nombreCarrera}" title="#{bundle.ViewUsuarioTitle_carreraId}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_departamentoId}"/>
-                        <h:outputText value="#{usuarioController.selected.departamentoId}" title="#{bundle.ViewUsuarioTitle_departamentoId}"/>
+                        <h:outputText value="#{usuarioController.selected.departamentoId.nombreDepartamento}" title="#{bundle.ViewUsuarioTitle_departamentoId}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UsuarioViewDialog.hide()"/>
                 </h:panelGroup>

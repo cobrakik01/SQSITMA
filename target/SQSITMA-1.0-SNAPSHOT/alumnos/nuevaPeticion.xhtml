@@ -15,7 +15,7 @@
                         <p:outputLabel value="Asunto:" for="asunto" />
                         <p:inputText id="asunto" value="#{alumnosManagedBean.peticionSelected.asunto}" title="Asunto" required="true" requiredMessage="The Asunto field is required."/>
                         <p:outputLabel value="Peticion:" for="peticion" />
-                        <p:inputText id="peticion" value="#{alumnosManagedBean.peticionSelected.peticion}" title="Peticion" required="true" requiredMessage="The Peticion field is required."/>
+                        <p:inputTextarea id="peticion" value="#{alumnosManagedBean.peticionSelected.peticion}" title="Peticion" required="true" requiredMessage="The Peticion field is required." style="max-height: 200px; overflow: auto;" maxlength="500" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{alumnosManagedBean.createPeticion}" value="#{bundle.Save}" update="display,:PeticionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PeticionCreateDialog');" onclick="PeticionCreateDialog.hide()"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PeticionCreateDialog.hide()"/>
