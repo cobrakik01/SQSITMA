@@ -31,6 +31,11 @@ public class PeticionFacade extends AbstractFacade<Peticion> {
         super(Peticion.class);
     }
 
+    @Override
+    public List<Peticion> findAll() {
+        return getEntityManager().createNamedQuery("Peticion.findAll").getResultList();
+    }
+
     public List<Peticion> findAll(Usuario usuario) {
         return getEntityManager().createNamedQuery("Peticion.findByEmail").setParameter("email", usuario).getResultList();
     }
