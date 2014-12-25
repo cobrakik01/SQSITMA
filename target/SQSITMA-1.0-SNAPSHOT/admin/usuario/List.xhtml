@@ -22,44 +22,42 @@
                         <p:dataExporter type="pdf" target="datalist" fileName="usuarios" />
                         Generar Reporte.
                     </h:commandLink>
-                    
                     <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
                                  selectionMode="single" selection="#{usuarioController.selected}"
                                  paginator="true"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                  rowKey="#{item.email}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rows="5"
+                                 rowsPerPageTemplate="5,10,20,30,40,50"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column headerText="#{bundle.ListUsuarioTitle_clave}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_clave}" sortBy="#{item.clave}">
                             <h:outputText value="#{item.clave}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_email}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_email}" sortBy="#{item.email}">
                             <h:outputText value="#{item.email}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_nombre}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_nombre}" sortBy="#{item.nombre}">
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_app}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_app}" sortBy="#{item.app}">
                             <h:outputText value="#{item.app}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_apm}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_apm}" sortBy="#{item.apm}">
                             <h:outputText value="#{item.apm}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_alumno}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_alumno}" sortBy="#{item.alumno}">
                             <p:selectBooleanCheckbox value="#{item.alumno}" disabled="true"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_carreraId}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_carreraId}" sortBy="#{item.carreraId.nombreCarrera}">
                             <h:outputText value="#{item.carreraId.nombreCarrera}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_departamentoId}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_departamentoId}" sortBy="#{item.departamentoId.nombreDepartamento}">
                             <h:outputText value="#{item.departamentoId.nombreDepartamento}"/>
                         </p:column>
-                        <p:column headerText="#{bundle.ListUsuarioTitle_createdAt}">
+                        <p:column headerText="#{bundle.ListUsuarioTitle_createdAt}" sortBy="#{item.createdAt}">
                             <h:outputText value="#{item.createdAt}">
                                 <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
