@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -49,6 +50,9 @@ public class PersonalAtencion implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+    @Size(max = 500)
+    @Column(name = "comentario")
+    private String comentario;
     @JoinColumn(name = "estatus_peticion_id", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private EstatusPeticion estatusPeticionId;
@@ -134,6 +138,14 @@ public class PersonalAtencion implements Serializable {
     @Override
     public String toString() {
         return "com.cbk.sqsitma.entity.PersonalAtencion[ id=" + id + " ]";
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
 }

@@ -13,12 +13,13 @@
                 <h:panelGroup id="display">
 
                     <div class="col-md-12 clearfix">
-                        <p:panelGrid columns="3">
+                        <p:panelGrid columns="4">
                             <p:outputLabel value="Estatus:" for="estatusPeticionId" />
                             <p:selectOneMenu id="estatusPeticionId" value="#{peticionController.estatusPeticion}" required="true" requiredMessage="The EstatusPeticionId field is required.">
                                 <!-- TODO: update below reference to list of available items-->
                                 <f:selectItems value="#{peticionController.listaEstatusPeticion}" var="estatus" itemLabel="#{estatus.nombreEstatus}"/>
                             </p:selectOneMenu>
+                            <p:inputTextarea value="#{peticionController.comentario}" placeholder="Comentarios..." />
                             <p:commandButton value="Responder" actionListener="#{peticionController.responderPeticion()}" update="RespuestasTable,:growl, :PeticionListForm:datalist" />
                         </p:panelGrid>
                     </div>
@@ -52,6 +53,9 @@
                             </p:column>
                             <p:column headerText="Departamento" sortBy="#{item.personalEmail.departamentoId.nombreDepartamento}">
                                 <h:outputText value="#{item.personalEmail.departamentoId.nombreDepartamento}"/>
+                            </p:column>
+                            <p:column headerText="Comentario" sortBy="#{item.comentario}">
+                                <h:outputText value="#{((item.comentario != null) ? item.comentario : 'Sin comentarios')}"/>
                             </p:column>
                             <p:column headerText="Fecha de respuesta" sortBy="#{item.createdAt}">
                                 <h:outputText value="#{item.createdAt}">

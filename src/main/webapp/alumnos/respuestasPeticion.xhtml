@@ -38,6 +38,9 @@
                             <p:column headerText="Departamento" sortBy="#{item.personalEmail.departamentoId.nombreDepartamento}">
                                 <h:outputText value="#{item.personalEmail.departamentoId.nombreDepartamento}"/>
                             </p:column>
+                            <p:column headerText="Comentario" sortBy="#{item.comentario}">
+                                <h:outputText value="#{((item.comentario != null) ? item.comentario : 'Sin comentarios')}"/>
+                            </p:column>
                             <p:column headerText="Fecha de respuesta" sortBy="#{item.createdAt}">
                                 <h:outputText value="#{item.createdAt}">
                                     <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />

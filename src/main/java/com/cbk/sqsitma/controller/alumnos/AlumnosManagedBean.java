@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedProperty;
@@ -61,6 +62,11 @@ public class AlumnosManagedBean implements Serializable {
      */
     public AlumnosManagedBean() {
     }
+    
+    @PreDestroy
+    public void destroy() {
+        peticiones = null;
+    }
 
     public List<PersonalAtencion> getRespuestasPeticionSeleccionada() {
         respuestasPeticionSeleccionada = personalAtencionFacade.findAll(peticionSelected);
@@ -84,10 +90,11 @@ public class AlumnosManagedBean implements Serializable {
     }
 
     public List<Peticion> getPeticiones() {
-        if (peticiones == null) {
+        //if (peticiones == null) {
+            peticiones = null;
             Usuario us = JsfUtil.getUserSession(usuarioFacade);
             peticiones = peticionFacade.findAll(us);
-        }
+        //}
         return peticiones;
     }
 

@@ -43,8 +43,17 @@ public class PeticionController implements Serializable {
     private PersonalAtencion personalAtencion;
     private EstatusPeticion estatusPeticion;
     private List<EstatusPeticion> listaEstatusPeticion;
+    private String comentario;
 
     public PeticionController() {
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
     public List<Peticion> getFilteredPeticiones() {
@@ -250,8 +259,10 @@ public class PeticionController implements Serializable {
         respuesta.setEstatusPeticionId(estatusSeleccionado);
         respuesta.setPersonalEmail(usuarioQueAtiende);
         respuesta.setPeticionId(peticionSeleccionada);
+        respuesta.setComentario(comentario);
         personalAtencionFacade.create(respuesta);
-
+        
+        comentario = null;
         JsfUtil.addSuccessMessage("Se registro la respuesta correctamente.");
     }
 
